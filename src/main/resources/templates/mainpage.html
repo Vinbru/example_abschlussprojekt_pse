@@ -1,0 +1,71 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+</head>
+<body>
+ <div class="container">
+  <h1>Abgabenzuordnung</h1>
+  <h2>Blätter</h2>
+  <table class="table table-sm table-striped">
+   <thead class="thead-dark">
+    <tr>
+     <th scope="col">Name</th>
+     <th scope="col">zugeordnet</th>
+     <th scope="col">gesamt</th>
+     <th></th>
+     <th></th>
+     <th></th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr th:each="blatt : ${blaetter}">
+     <td th:text="${blatt.name}">Blatt 0</td>
+     <td th:text="${blatt.anzahlZugeordneteAbgaben()}">
+     <td th:text="${blatt.anzahlAllerAbgaben()}"></td>
+     <td><a class="btn btn-primary"
+      th:href="@{/zuordnung(id=${blatt.id})}">Zuordnung ansehen</a></td>
+     <td>
+       <form method="post" action="/zuordnen"
+        style="margin-bottom: 0em;">
+        <div class="form-row">
+         <input type="hidden" name="id" th:value="${blatt.id}"></input>
+         <div class="col-auto">
+          <button type="submit" class="btn btn-primary mb-2">Automatisch
+           Zuordnen</button>
+         </div>
+        </div>
+       </form>
+     </td>
+     <td>
+       <form method="post" action="/hinzufuegen"
+        style="margin-bottom: 0em;">
+        <div class="form-row">
+         <input type="hidden" name="id" th:value="${blatt.id}"></input>
+         <div class="col-auto">
+          <button type="submit" class="btn btn-primary mb-2">Nachträgliche
+           Abgabe</button>
+         </div>
+        </div>
+       </form>
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <h2>Korrektoren</h2>
+  <table class="table table-sm table-striped">
+   <thead class="thead-dark">
+    <tr>
+     <th scope="col">Name</th>
+     <th scope="col">Stunden</th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr th:each="korrektor : ${korrektoren}">
+     <td th:text="${korrektor.name}">Korrektor</td>
+     <td th:text="${korrektor.stunden}"></td>
+    </tr>
+   </tbody>
+  </table>
+ </div>
+</body>
+</html>

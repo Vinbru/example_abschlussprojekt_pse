@@ -1,0 +1,31 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+</head>
+<body>
+ <div class="container">
+  <h1>Zuordnung zu Korrektoren</h1>
+  <div class="alert alert-warning" th:if="${unzugeordnet > 0}">
+   Es gibt noch <span th:text="${unzugeordnet}"></span> unzugeordnete
+   Abgaben.
+  </div>
+  <table class="table">
+   <thead>
+    <tr>
+     <th scope="col">Name</th>
+     <th scope="col">Stunden</th>
+     <th scope="col">Abgaben</th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr th:each="korrektor : ${korrektoren}">
+     <td th:text="${korrektor.name}">Korrektor</td>
+     <td th:text="${korrektor.stunden}">0</td>
+     <td th:text="${zuordnung.get(korrektor)?.size()}">0</td>
+    </tr>
+   </tbody>
+  </table>
+  <a href="/">Zurück</a>
+ </div>
+</body>
+</html>
